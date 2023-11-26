@@ -1,5 +1,5 @@
 <pngx-page-header title="Logs" i18n-title>
-
+  <pngx-input-check i18n-title title="Auto-Refresh" (change)="toggle()"></pngx-input-check>
 </pngx-page-header>
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="activeLog" (activeIdChange)="reloadLogs()" class="nav-tabs">

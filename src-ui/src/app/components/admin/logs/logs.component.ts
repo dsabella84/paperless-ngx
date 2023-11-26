@@ -27,6 +27,8 @@ export class LogsComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   public isLoading: boolean = false
 
+  public autoRefresh: boolean = false
+
   @ViewChild('logContainer') logContainer: ElementRef
 
   ngOnInit(): void {
@@ -62,6 +64,14 @@ export class LogsComponent implements OnInit, AfterViewChecked, OnDestroy {
         next: (result) => {
           this.logs = result
           this.isLoading = false
+
+          if (this.autoRefresh) {
+            setTimeout(() => {
+              if (this.autoRefresh) {
+                this.reloadLogs()
+              }
+            }, 4000)
+          }
         },
         error: () => {
           this.logs = []
@@ -90,5 +100,10 @@ export class LogsComponent implements OnInit, AfterViewChecked, OnDestroy {
       left: 0,
       behavior: 'auto',
     })
+  }
+
+  toggle() {
+    this.autoRefresh = !this.autoRefresh
+    this.reloadLogs()
   }
 }
